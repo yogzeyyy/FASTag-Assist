@@ -1,61 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FASTag Assist</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FASTag Assist</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <style>
-        body{
-            font-family:Arial;
-            background:#f2f2f2;
-            text-align:center;
-            margin-top:80px;
-        }
+<style>
+body{
+font-family:Arial;
+background:#f2f2f2;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
 
-        .box{
-            background:white;
-            width:350px;
-            margin:auto;
-            padding:30px;
-            border-radius:12px;
-            box-shadow:0 0 15px rgba(0,0,0,0.2);
-        }
+.box{
+background:white;
+padding:20px;
+border-radius:10px;
+width:320px;
+text-align:center;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
 
-        input{
-            width:90%;
-            padding:12px;
-            font-size:16px;
-            margin-top:15px;
-        }
+input{
+width:90%;
+padding:10px;
+margin:10px;
+font-size:16px;
+}
 
-        button{
-            margin-top:20px;
-            padding:12px 30px;
-            font-size:16px;
-            background:#0b7dda;
-            color:white;
-            border:none;
-            border-radius:8px;
-            cursor:pointer;
-        }
+button{
+padding:10px 20px;
+font-size:16px;
+background:#2196F3;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
 
-        button:hover{
-            background:#095ea8;
-        }
-    </style>
+button:hover{
+background:#1976D2;
+}
+</style>
 </head>
 
 <body>
 
 <div class="box">
-
-<h1>FASTag Assist</h1>
+<h2>FASTag Assist</h2>
 
 <p>Enter your message</p>
 
 <input type="text" id="msg" placeholder="Type message here">
 
-<br>
+<br><br>
 
 <button onclick="sendMessage()">Send Message</button>
 
@@ -63,13 +64,44 @@
 
 </div>
 
-<script>
+<script type="module">
 
-function sendMessage(){
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-var message=document.getElementById("msg").value;
+const firebaseConfig = {
 
-document.getElementById("status").innerHTML="Message Sent : "+message;
+apiKey: "PASTE_YOUR_API_KEY",
+
+authDomain: "fastag-assist.firebaseapp.com",
+
+databaseURL: "https://fastag-assist-default-rtdb.firebaseio.com",
+
+projectId: "fastag-assist",
+
+storageBucket: "fastag-assist.appspot.com",
+
+messagingSenderId: "YOUR_SENDER_ID",
+
+appId: "YOUR_APP_ID"
+
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+window.sendMessage=function(){
+
+let message=document.getElementById("msg").value;
+
+set(ref(db,"Message"),{
+text:message,
+time:Date.now()
+});
+
+document.getElementById("status").innerHTML="✅ Message Sent Successfully";
+
+document.getElementById("msg").value="";
 
 }
 
