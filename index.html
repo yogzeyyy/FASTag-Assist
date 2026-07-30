@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FASTag Assist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body{
+            font-family:Arial;
+            background:#f2f2f2;
+            text-align:center;
+            margin-top:80px;
+        }
+
+        .box{
+            background:white;
+            width:350px;
+            margin:auto;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 0 15px rgba(0,0,0,0.2);
+        }
+
+        input{
+            width:90%;
+            padding:12px;
+            font-size:16px;
+            margin-top:15px;
+        }
+
+        button{
+            margin-top:20px;
+            padding:12px 30px;
+            font-size:16px;
+            background:#0b7dda;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#095ea8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h1>FASTag Assist</h1>
+
+<p>Enter your message</p>
+
+<input type="text" id="msg" placeholder="Type message here">
+
+<br>
+
+<button onclick="sendMessage()">Send Message</button>
+
+<p id="status"></p>
+
+</div>
+
+<script>
+
+function sendMessage(){
+
+var message=document.getElementById("msg").value;
+
+document.getElementById("status").innerHTML="Message Sent : "+message;
+
+}
+
+</script>
+
+</body>
+</html>
